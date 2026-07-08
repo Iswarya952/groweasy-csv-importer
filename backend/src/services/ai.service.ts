@@ -10,7 +10,7 @@ import {
   SkippedRecord,
 } from '../types/crm.types';
 
-const BATCH_SIZE = Number(process.env.AI_BATCH_SIZE || 10);
+const BATCH_SIZE = Number(process.env.AI_BATCH_SIZE || 100);
 
 /**
  * Builds the system/task prompt sent to Gemini for one batch of raw rows.

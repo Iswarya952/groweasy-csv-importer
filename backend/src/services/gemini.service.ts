@@ -1,7 +1,7 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
 const apiKey = process.env.GEMINI_API_KEY;
-const modelName = process.env.GEMINI_MODEL || 'gemini-1.5-flash';
+const modelName = process.env.GEMINI_MODEL || 'gemini-flash-latest';
 const maxRetries = Number(process.env.AI_MAX_RETRIES || 3);
 const retryDelayMs = Number(process.env.AI_RETRY_DELAY_MS || 1000);
 
