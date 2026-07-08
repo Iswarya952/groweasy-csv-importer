@@ -1,6 +1,6 @@
 import { ImportResult, PreviewResponse } from '@/types';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8080';
+const API_URL = (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080').replace(/\/$/, '');
 
 interface ApiEnvelope<T> {
   success: boolean;
@@ -12,10 +12,7 @@ async function postFile<T>(path: string, file: File): Promise<T> {
   const formData = new FormData();
   formData.append('file', file);
 
-  const targetUrl = `${API_URL}${path}`;
-  console.log('[API] Sending POST request to:', targetUrl);
-
-  const res = await fetch(targetUrl, {
+  const res = await fetch(`${API_URL}${path}`, {
     method: 'POST',
     body: formData,
   });

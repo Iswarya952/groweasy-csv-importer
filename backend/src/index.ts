@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 8080;
 
 const allowedOrigins = (process.env.CORS_ORIGIN || 'http://localhost:3000')
   .split(',')
-  .map((o) => o.trim());
+  .map((o) => o.trim().replace(/\/$/, ''));
 
 app.use(
   cors({
