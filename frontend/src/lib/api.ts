@@ -12,7 +12,10 @@ async function postFile<T>(path: string, file: File): Promise<T> {
   const formData = new FormData();
   formData.append('file', file);
 
-  const res = await fetch(`${API_URL}${path}`, {
+  const targetUrl = `${API_URL}${path}`;
+  console.log('[API] Sending POST request to:', targetUrl);
+
+  const res = await fetch(targetUrl, {
     method: 'POST',
     body: formData,
   });
