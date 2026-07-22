@@ -1,19 +1,5 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
-const apiKey = process.env.GEMINI_API_KEY;
-const modelName = process.env.GEMINI_MODEL || 'gemini-1.5-flash';
-const maxRetries = Number(process.env.AI_MAX_RETRIES || 3);
-const retryDelayMs = Number(process.env.AI_RETRY_DELAY_MS || 1000);
-
-if (!apiKey) {
-  // eslint-disable-next-line no-console
-  console.warn(
-    '[gemini.service] GEMINI_API_KEY is not set. AI extraction calls will fail until it is configured in .env'
-  );
-}
-
-const genAI = new GoogleGenerativeAI(apiKey || '');
-
 function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
@@ -24,6 +10,16 @@ function sleep(ms: number): Promise<void> {
  * timeouts, 5xx errors) up to AI_MAX_RETRIES times.
  */
 export async function callGemini(prompt: string): Promise<string> {
+  const apiKey = process.env.GEMINI_API_KEY;
+  const modelName = process.env.GEMINI_MODEL || 'gemini-1.5-flash';
+  const maxRetries = Number(process.env.AI_MAX_RETRIES || 3);
+  const retryDelayMs = Number(process.env.AI_RETRY_DELAY_MS || 1000);
+
+  if (!apiKey || apiKey === 'your_gemini_api_key_here') {
+    throw new Error('GEMINI_API_KEY is missing or invalid in backend/.env');
+  }
+
+  const genAI = new GoogleGenerativeAI(apiKey);
   const model = genAI.getGenerativeModel({
     model: modelName,
     generationConfig: {
