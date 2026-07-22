@@ -196,7 +196,7 @@ export async function extractCrmRecords(rows: Record<string, string>[]): Promise
     throw new Error('GEMINI_API_KEY is not configured. Set it in environment variables.');
   }
 
-  const batchSize = Number(process.env.AI_BATCH_SIZE || 10);
+  const batchSize = Number(process.env.AI_BATCH_SIZE || 50);
   const batches = chunkArray(rows, batchSize);
   const importedRecords: CrmRecord[] = [];
   const skippedRecords: SkippedRecord[] = [];
