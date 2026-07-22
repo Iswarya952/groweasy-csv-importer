@@ -11,7 +11,7 @@ function sleep(ms: number): Promise<void> {
  */
 export async function callGemini(prompt: string): Promise<string> {
   const apiKey = process.env.GEMINI_API_KEY;
-  const modelName = process.env.GEMINI_MODEL || 'gemini-1.5-flash';
+  const modelName = process.env.GEMINI_MODEL || 'gemini-3.1-flash-lite';
   const maxRetries = Number(process.env.AI_MAX_RETRIES || 3);
   const retryDelayMs = Number(process.env.AI_RETRY_DELAY_MS || 1000);
 

@@ -190,7 +190,7 @@ export async function processAiBatch(
 
 export async function extractCrmRecords(rows: Record<string, string>[]): Promise<ImportResult> {
   const apiKey = process.env.GEMINI_API_KEY;
-  const modelName = process.env.GEMINI_MODEL || 'gemini-3.6-flash';
+  const modelName = process.env.GEMINI_MODEL || 'gemini-3.1-flash-lite';
 
   if (!apiKey || apiKey === 'your_gemini_api_key_here') {
     throw new Error('GEMINI_API_KEY is not configured. Set it in environment variables.');
